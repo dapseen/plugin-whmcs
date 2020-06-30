@@ -111,7 +111,13 @@ function paystack_link($params)
     
     // Invoice
     $invoiceId = $params['invoiceid'];
-    $amountinkobo = intval(floatval($params['amount'])*100);
+
+    //pass transaction charges to customers
+    $floatAmount = intval(floatval($params['amount'])*100);
+
+    $amountinkobo = intval(floatval(($floatAmount + 10000 ) / (1 - 0.015)));
+    
+
     $currency = $params['currency'];
     ///Transaction_reference
     $txnref         = $invoiceId . '_' .time();
